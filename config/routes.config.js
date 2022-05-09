@@ -11,7 +11,7 @@ const users = require('../controllers/users.controller');
 // Users Routes
 router.post('/api/login', users.login);
 router.post('/api/users', users.create);
-router.patch('/api/users/:id/activate', users.activate);
+router.get('/api/users/:id/activate', users.activate);
 
 // Posts Routes
 router.get('/api/posts', auth.checkAuth, posts.list);

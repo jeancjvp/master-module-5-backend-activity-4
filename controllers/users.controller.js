@@ -1,6 +1,7 @@
 const Users = require('../models/users.model');
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors');
+const { sendValitionEmail } = require('../config/nodemailer.config');
 
 // Create User
 module.exports.create = (req, res, next) => {
@@ -8,6 +9,7 @@ module.exports.create = (req, res, next) => {
 
 	Users.create(data)
 		.then((user) => {
+			sendValitionEmail(user);
 			res.status(201).json(user);
 		})
 		.catch(next);
@@ -57,7 +59,7 @@ module.exports.activate = (req, res, next) => {
 	Users.findByIdAndUpdate(id, data, { new: true })
 		.then((user) => {
 			if (user) {
-				res.status(200).json(user);
+				res.status(200).json({ message: 'success' });
 			} else {
 				next(createError.NotFound());
 			}
