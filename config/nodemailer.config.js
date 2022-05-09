@@ -21,7 +21,7 @@ module.exports.sendValitionEmail = (user) => {
 		subject: 'Welcome to Arq. Servidores',
 		html: `
 		<h1>Welcome to Arq. Servidores</h1>
-		<a href='http://localhost:8000/api/users/${user.id}/activate'>Activate you account</a>
+		<a href='${process.env.HOST}/api/users/${user.id}/activate'>Activate you account</a>
 		`,
 	})
 	.then(() => {
